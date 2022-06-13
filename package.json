@@ -1,0 +1,17 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "NodeJS Task 3. Simple CRUD API",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start:dev": "ts-node ./src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Zeekka",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^4.7.3",
+    "ts-node": "^10.8.1"
+  }
+}
