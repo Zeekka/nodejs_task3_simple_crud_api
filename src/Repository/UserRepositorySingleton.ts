@@ -1,5 +1,6 @@
 import User from '../User/User.js';
 import DuplicateEntryError from '../Errors/DuplicateEntryError.js';
+import NotFoundError from '../Errors/NotFoundError.js';
 
 export default class UserRepositorySingleton {
     private static instance?: UserRepositorySingleton;
@@ -28,16 +29,14 @@ export default class UserRepositorySingleton {
         this._users.push(newUser);
     }
 
-    getUser(uuid: string): User {
-        let requestedUser: User;
+    getUser(uuid: string): User | never {
+        const user: User | undefined = this._users.filter((user) => uuid === user.uuid).pop();
 
-        this._users.forEach((user) => {
-            if (uuid === user.uuid) {
-                requestedUser = user;
-            }
-        });
+        if (!user) {
+            throw new NotFoundError('User not found', uuid);
+        }
 
-        return requestedUser;
+        return user;
     }
 
     deleteUser(uuid: string): void {
