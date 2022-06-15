@@ -1,13 +1,13 @@
 export default class NotFoundError extends Error {
 
-    private uuid: string;
+    private context: string;
 
-    constructor(message: string, uuid: string) {
+    constructor(message: string, context: string) {
         super(message);
-        this.uuid = uuid;
+        this.context = context;
     }
 
     getContext(): string {
-        return `User with uuid: ${this.uuid} not found`;
+        return `Context ${this.context} not found`;
     }
 }

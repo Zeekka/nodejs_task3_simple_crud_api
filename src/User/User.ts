@@ -29,4 +29,12 @@ export default class User {
     get hobbies(): string[] {
         return this._hobbies;
     }
+
+    update(newData: UserDTO): User {
+        this._username = newData.username;
+        this._age = newData.age;
+        this._hobbies = newData.hobbies;
+
+        return this;
+    }
 }

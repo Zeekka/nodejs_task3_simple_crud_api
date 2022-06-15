@@ -41,5 +41,6 @@ export default class UserRepositorySingleton {
 
     deleteUser(uuid: string): void {
         this._users = this._users.filter((user) => user.uuid !== uuid);
+        return;
     }
 }
