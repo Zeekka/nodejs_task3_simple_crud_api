@@ -11,7 +11,6 @@ import NotFoundError from './Errors/NotFoundError.js';
 
 dotenv.config();
 
-// TODO: replace startsWith(...) to regExp
 const server: http.Server = http.createServer(async (request, response) => {
     try {
         let responseContent!: User | User[];
