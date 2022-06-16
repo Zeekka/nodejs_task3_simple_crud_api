@@ -5,9 +5,10 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "start:dev": "./node_modules/.bin/ts-node ./src/index.ts",
-    "start:prod": "npm run compile && node dist/index.js",
+    "start:dev": "npm run compile && node ./dist/index.js",
+    "start:prod": "npm run build && node ./bundle/bundle.cjs",
     "compile": "./node_modules/.bin/tsc",
+    "build": "./node_modules/.bin/tsc && ./node_modules/.bin/webpack --stats-error-details",
     "lint": "./node_modules/.bin/eslint src/*",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles"
   },
@@ -23,8 +24,11 @@
     "eslint": "^8.17.0",
     "jest": "^28.1.1",
     "prettier": "^2.7.0",
+    "ts-loader": "^9.3.0",
     "ts-node": "^10.8.1",
-    "typescript": "^4.7.3"
+    "typescript": "^4.7.3",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.10.0"
   },
   "dependencies": {
     "dotenv": "^16.0.1",

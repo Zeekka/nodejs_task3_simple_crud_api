@@ -23,6 +23,7 @@ docker run -p 80:80 --add-host host.docker.internal:host-gateway -v $(pwd):/app 
 1) Запускаешь `npm install`
 2) Тыкаешь команды из списка ниже
 ### Команды
- - Запустить приложение в dev `npm run start:dev`
+ - Запустить приложение в dev моде `npm run start:dev`
+ - Запустить приложение в prod моде `npm run start:prod`
  - Запустить линт `npm run lint`
  - Запустить тесты `npm test` (Тесты запускать только после запуска приложения)
