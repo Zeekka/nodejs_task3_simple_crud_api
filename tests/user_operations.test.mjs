@@ -1,10 +1,13 @@
 import http, { get, request } from 'http';
 import { validate } from 'uuid';
+import dotenv from 'dotenv';
+
+dotenv.config()
 
 const options = {
-    host: 'host.docker.internal',
+    host: process.env.APPLICATION_PLATFORM === 'docker' ? 'host.docker.internal' : 'localhost',
     path: '/api/users',
-    port: 80
+    port: Number(process.env.APPLICATION_PORT) ?? 80
 }
 
 describe('User operations', () => {
