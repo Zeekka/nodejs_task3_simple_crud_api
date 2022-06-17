@@ -1,5 +1,7 @@
 Dockerfile
 .dockerignore
 dist
+bundle
 node_modules
 .idea
+*.local
