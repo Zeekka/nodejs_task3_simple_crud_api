@@ -8,10 +8,16 @@ import InvalidInputError from './Errors/InvalidInputError.js';
 import { validate } from 'uuid';
 import { response200, response201, response400, response404, response500, response204 } from './utils/responses.js';
 import NotFoundError from './Errors/NotFoundError.js';
+import cluster from 'cluster';
+import os from 'os';
 
 dotenv.config();
 
 const server: http.Server = http.createServer(async (request, response) => {
+    if (isVerboseMode) {
+        console.log(`Application pid: ${process.pid} got request :: ${request.method} ${request.url}`);
+    }
+
     try {
         let responseContent!: User | User[];
         if (request.url?.startsWith('/api/users') && request.method === 'GET') {
@@ -123,8 +129,17 @@ const server: http.Server = http.createServer(async (request, response) => {
     }
 });
 
+const cpusNumber: number = os.cpus().length;
+const isClusterMode: boolean = process.argv.includes('--cluster');
+const isVerboseMode: boolean = process.argv.includes('--verbose');
 const applicationPort: number = process.env.APPLICATION_PORT ? Number(process.env.APPLICATION_PORT) : 80;
 
-server.listen(applicationPort, () => {
-    console.log(`Application is running on port ${applicationPort}`);
-});
+if (cluster.isPrimary && isClusterMode) {
+    for (let i = 0; i < cpusNumber; i++) {
+        cluster.fork();
+    }
+} else {
+    server.listen(applicationPort, () => {
+        console.log(`Application pid: ${process.pid} is running on port ${applicationPort}`);
+    });
+}

@@ -7,6 +7,7 @@
   "scripts": {
     "start:dev": "npm run compile && node ./dist/index.js",
     "start:prod": "npm run build && node ./bundle/bundle.cjs",
+    "start:multi": "npm run build && node ./bundle/bundle.cjs --cluster",
     "compile": "./node_modules/.bin/tsc",
     "build": "./node_modules/.bin/tsc && ./node_modules/.bin/webpack --stats-error-details",
     "lint": "./node_modules/.bin/eslint src/*",
